@@ -1,9 +1,9 @@
 #include <stdio.h>
 
 int main(void) {
-	int size = 5;
+	int size = 13;
 	int oldsize = size;
-	int mas[5] = { 0, 5, 6, 0, 2 };
+	int mas[100] = { 0, 5, 0, 6, 0, 2, 7, 0, 0, 0, 7, 1, 0 };
 	
 	for (int i = 0; i < size; i++) {
 		printf("%i", mas[i]);
@@ -12,14 +12,24 @@ int main(void) {
 	
 	for (int i = 0; i < size; i++) {
 		if (mas[i] == 0) {
-			for (int j = i; j < size - 1; j++) {
-				mas[j] = mas[j + 1];
+			int num = 0;
+			int k = i;
+			while (mas[k++] == 0) {
+				num++;
 			}
-			mas[size - 1] = -1;
+
+			for (int j = i; j < size - num; j++) {
+				mas[j] = mas[j + num];
+			}
+			for (int j = 0; j < num; j++) {
+				mas[size - 1 - j] = -1;
+			}
+			
+			size -= num;
 		}
 	}
 
-	for (int i = 0; i < size; i++) {
+	for (int i = 0; i < oldsize; i++) {
 		printf("%i", mas[i]);
 	}
 	printf("\n");
